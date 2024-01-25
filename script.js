@@ -1,8 +1,6 @@
 const randomizeBtn = document.querySelector("#randomizeBtn");
 const divMain = document.querySelector("#main");
 
-const characters = [];
-
 // Function to create new character objects
 function Character(name, category, possibleSlots, imageURL) {
   this.name = name;
@@ -12,7 +10,9 @@ function Character(name, category, possibleSlots, imageURL) {
   characters.push(this);
 }
 
-// Add new characters
+// Character database
+const characters = [];
+
 new Character("Magnus", "Warrior", [], "./portraits/magnus.jpg");
 new Character("Heiner", "Warrior", [], "./portraits/heiner.jpg");
 new Character("Grukli", "Warrior", [], "./portraits/grukli.jpg");
