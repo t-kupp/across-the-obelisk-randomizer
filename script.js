@@ -66,3 +66,4 @@ randomizeBtn.addEventListener("click", () => {
 
 //TESTER
 //jaja
+//pull den shit
