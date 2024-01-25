@@ -43,7 +43,6 @@ let newTeam = [];
 
 function randomizeTeam() {
   newTeam.length = 0;
-
   for (let i = 0; i < 4; i++) {
     let randomCharacter = characters[Math.floor(Math.random() * characters.length)];
     // Check for duplicate character
@@ -51,7 +50,6 @@ function randomizeTeam() {
       i--;
       continue;
     }
-
     newTeam.push(randomCharacter);
   }
 }
