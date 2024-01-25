@@ -5,14 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Across The Obelisk Randomizer</title>
+    <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
-    <button id="randomizeBtn">Randomize!</button>
-    <div id="main"></div>
-
-    <a href="https://github.com/t-kupp/across-the-obelisk-randomizer/blob/main/script.js"
-      >Source code</a
-    >
+    <div class="content">
+      <button id="randomizeBtn">Randomize!</button>
+      <div class="displayWrapper">
+        <div id="teamDisplay" class="teamDisplay"></div>
+        <div id="playerList" class="playerList">
+          <input type="text" name="playerNameInput" id="playerNameInput" class="playerNameInput" />
+        </div>
+        <button id="addPlayerBtn" class="addPlayerBtn">+</button>
+      </div>
+      <button id="defaultBtn">Default</button>
+      <button id="freeForAllBtn">Free for all!</button>
+      <a href="https://github.com/t-kupp/across-the-obelisk-randomizer/blob/main/script.js"
+        >Source code</a
+      >
+    </div>
   </body>
 </html>

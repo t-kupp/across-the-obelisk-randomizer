@@ -1,0 +1,35 @@
+body {
+  background-color: #292929;
+}
+
+.teamDisplay {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.characterPortrait {
+  margin: 10px;
+  width: 185px;
+  height: 290px;
+}
+
+.displayWrapper {
+  display: flex;
+}
+
+.textarea {
+  border: none;
+  outline: none;
+  resize: none;
+}
+
+.playerList {
+  display: flex;
+  flex-direction: column;
+}
+
+.addPlayerBtn {
+  height: 21px;
+  width: 22px;
+}
