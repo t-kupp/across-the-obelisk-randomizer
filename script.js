@@ -46,6 +46,7 @@ function randomizeTeam() {
 
   for (let i = 0; i < 4; i++) {
     let randomCharacter = characters[Math.floor(Math.random() * characters.length)];
+    // Check for duplicate character
     if (newTeam.some((e) => e.name === randomCharacter.name)) {
       i--;
       continue;
