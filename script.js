@@ -63,3 +63,4 @@ randomizeBtn.addEventListener("click", () => {
     teamDisplay.textContent = newTeam[i].name + " - " + newTeam[i].category;
   }
 });
+// erigh3ewoj45hjro0jztrzh65u
