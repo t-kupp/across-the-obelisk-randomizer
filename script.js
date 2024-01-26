@@ -98,19 +98,21 @@ let playerOrder = []; //Stores which player will play which slot
 
 function randomizeTeam() {
   //Check if preferred player counts of players are even possible and end the function if they are not
-  let totalNeededChars = 0;
-  let flexibilityExists = false; //Will be true if atleast someone has "?" selected
-  for (player of players) {
-    if (player.preferredCharCount == 0) {
-      flexibilityExists = true
-      totalNeededChars += 1
+  if (players.length != 0) {
+    let totalNeededChars = 0;
+    let flexibilityExists = false; //Will be true if atleast someone has "?" selected
+    for (player of players) {
+      if (player.preferredCharCount == 0) {
+        flexibilityExists = true
+        totalNeededChars += 1
+      }
+      else {
+        totalNeededChars += player.preferredCharCount
+      }
     }
-    else {
-      totalNeededChars += player.preferredCharCount
+    if (totalNeededChars > 4 || (totalNeededChars < 4 && !flexibilityExists)) {
+      return // Function ends if people selected too many or too few characters. Later you can insert some feedback code here
     }
-  }
-  if (totalNeededChars > 4 || (totalNeededChars < 4 && !flexibilityExists)) {
-    return // Function ends if people selected too many or too few characters. Later you can insert some feedback code here
   }
 
   //Start actual function
