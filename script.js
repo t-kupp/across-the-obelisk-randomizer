@@ -1,5 +1,5 @@
 const randomizeBtn = document.querySelector("#randomizeBtn");
-const divTeamDisplay = document.querySelector("#teamDisplay");
+const teamDisplay = document.querySelector("#teamDisplay");
 const defaultBtn = document.querySelector("#defaultBtn");
 const freeForAllBtn = document.querySelector("#freeForAllBtn");
 const playerList = document.querySelector("#playerList");
@@ -82,7 +82,7 @@ let playerOrder = []; //Stores which player will play which slot
 function randomizeTeam() {
   let validParty = false;
   let loopCounter = 0; //Counter to prevent infinite loops just in case
-  while(!validParty && loopCounter < 100000) {
+  while (!validParty && loopCounter < 100000) {
     loopCounter++;
     newTeam.length = 0;
     playerOrder.length = 0;
@@ -127,19 +127,35 @@ function randomizeTeam() {
         }
       }
     }
-  }//Loop stops if a valid party was made or the loop repeated 100.000 times without a valid party
+  } //Loop stops if a valid party was made or the loop repeated 100.000 times without a valid party
 }
 
 // Click the randomize button
 randomizeBtn.addEventListener("click", () => {
-  divTeamDisplay.innerHTML = "";
+  teamDisplay.innerHTML = "";
   randomizeTeam();
+  drawCharacterPortraits();
+});
+
+function drawCharacterPortraits() {
   for (let i = 0; i < 4; i++) {
-    const characterPortrait = divTeamDisplay.appendChild(document.createElement("img"));
+    // add a wrapper for the image and the player name
+    const portraitWrapper = teamDisplay.appendChild(document.createElement("div"));
+    portraitWrapper.classList.add("portraitWrapper");
+
+    // add the portrait image
+    const characterPortrait = portraitWrapper.appendChild(document.createElement("img"));
     characterPortrait.src = newTeam[i].imageURL;
     characterPortrait.classList.add("characterPortrait");
+
+    // add the player name
+    if (players.length != 0) {
+      const portraitPlayerName = portraitWrapper.appendChild(document.createElement("p"));
+      portraitPlayerName.classList.add("portraitPlayerName");
+      portraitPlayerName.textContent = playerOrder[i].name;
+    }
   }
-});
+}
 
 // default button
 defaultBtn.addEventListener("click", () => {
