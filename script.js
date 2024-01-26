@@ -45,6 +45,16 @@ function addCharactersToDatabase() {
 }
 addCharactersToDatabase();
 
+// preload images
+function preloadImage(url) {
+  let img = new Image();
+  img.src = url;
+}
+
+for (Character of characters) {
+  preloadImage(Character.imageURL);
+}
+
 // Function to create player objects
 function Player(name, bannedChars) {
   this.name = name;
