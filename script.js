@@ -225,3 +225,5 @@ function countElementInArray(element, array) {
     return counter
   }
 }
+
+// twist his diiiiick
