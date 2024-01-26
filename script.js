@@ -227,3 +227,4 @@ function countElementInArray(element, array) {
 }
 
 //Änderung luuuuuuuul hahaha
+// twist his diiiiick
