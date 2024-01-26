@@ -3,6 +3,8 @@ const divTeamDisplay = document.querySelector("#teamDisplay");
 const defaultBtn = document.querySelector("#defaultBtn");
 const freeForAllBtn = document.querySelector("#freeForAllBtn");
 const playerList = document.querySelector("#playerList");
+const addPlayerBtn = document.querySelector("#addPlayerBtn");
+const playerNameInput = document.querySelector("#playerNameInput");
 
 // Function to create new character objects
 function Character(name, category, possibleSlots, imageURL) {
@@ -51,6 +53,27 @@ function Player(name, bannedChars) {
 }
 
 let players = [];
+
+// add players to player list button
+addPlayerBtn.addEventListener("click", () => {
+  if (players.length === 4) return;
+
+  let newPlayerName = playerNameInput.value;
+  playerNameInput.value = ""; // empty text input field
+  new Player(newPlayerName, "");
+
+  //create new list entry
+  let newListEntry = playerList.appendChild(document.createElement("p"));
+  newListEntry.textContent = newPlayerName;
+  newListEntry.classList.add("playerListEntry");
+});
+
+// press Enter to add player to list
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    addPlayerBtn.click();
+  }
+});
 
 // Randomize team
 let newTeam = [];
@@ -101,7 +124,7 @@ function randomizeTeam() {
 
 // Click the randomize button
 randomizeBtn.addEventListener("click", () => {
-  divTeamDisplay.textContent = "";
+  divTeamDisplay.innerHTML = "";
   randomizeTeam();
   for (let i = 0; i < 4; i++) {
     const characterPortrait = divTeamDisplay.appendChild(document.createElement("img"));

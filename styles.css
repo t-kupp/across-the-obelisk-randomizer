@@ -1,4 +1,13 @@
+*,
+*::after,
+*::before {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
 body {
+  font-family: Lato, sans-serif;
   background-color: #292929;
 }
 
@@ -16,12 +25,11 @@ body {
 
 .displayWrapper {
   display: flex;
+  max-width: 1200px;
 }
 
-.textarea {
-  border: none;
-  outline: none;
-  resize: none;
+.displayWrapper > * {
+  margin: 0px 10px;
 }
 
 .playerList {
@@ -29,7 +37,38 @@ body {
   flex-direction: column;
 }
 
+.playerNameInput {
+  width: 100px;
+}
+
+.playerListEntry {
+  text-align: center;
+  margin-top: 10px;
+  padding: 5px;
+  color: white;
+  background-color: #5e5df0;
+  border: 1px solid white;
+}
+
 .addPlayerBtn {
-  height: 21px;
-  width: 22px;
+  width: 20px;
+}
+
+.randomizeBtn {
+  margin-left: 20px;
+  background: #5e5df0;
+  border-radius: 999px;
+  box-shadow: #5e5df0 0 10px 20px -10px;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  padding: 8px 18px;
+  border: 0;
+}
+
+.randomizeBtn:hover {
+  opacity: 0.8;
 }

@@ -6,23 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Across The Obelisk Randomizer</title>
     <link rel="stylesheet" href="styles.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+    </style>
     <script src="script.js" defer></script>
   </head>
   <body>
     <div class="content">
-      <button id="randomizeBtn">Randomize!</button>
       <div class="displayWrapper">
-        <div id="teamDisplay" class="teamDisplay"></div>
-        <div id="playerList" class="playerList">
-          <input type="text" name="playerNameInput" id="playerNameInput" class="playerNameInput" />
+        <div id="teamDisplay" class="teamDisplay">
+          <img src="./portraits/placeholder.jpg" class="characterPortrait" />
+          <img src="./portraits/placeholder.jpg" class="characterPortrait" />
+          <img src="./portraits/placeholder.jpg" class="characterPortrait" />
+          <img src="./portraits/placeholder.jpg" class="characterPortrait" />
         </div>
-        <button id="addPlayerBtn" class="addPlayerBtn">+</button>
+        <div id="playerList" class="playerList">
+          <div class="playerInputWrapper">
+            <input
+              type="text"
+              name="playerNameInput"
+              id="playerNameInput"
+              class="playerNameInput"
+              placeholder="Add player..."
+              maxlength="10"
+            />
+            <button id="addPlayerBtn" class="addPlayerBtn">+</button>
+          </div>
+        </div>
+        <div class="settingsList">
+          <button id="defaultBtn">Default</button>
+          <button id="freeForAllBtn">Free for all!</button>
+        </div>
       </div>
-      <button id="defaultBtn">Default</button>
-      <button id="freeForAllBtn">Free for all!</button>
-      <a href="https://github.com/t-kupp/across-the-obelisk-randomizer/blob/main/script.js"
-        >Source code</a
-      >
+      <button id="randomizeBtn" class="randomizeBtn">Randomize!</button>
     </div>
   </body>
 </html>
