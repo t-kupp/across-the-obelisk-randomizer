@@ -56,11 +56,11 @@ let players = [];
 
 // add players to player list button
 addPlayerBtn.addEventListener("click", () => {
-  if (players.length === 4) return;
+  if (players.length === 4 || playerNameInput.value.trim() === "") return;
 
   let newPlayerName = playerNameInput.value;
   playerNameInput.value = ""; // empty text input field
-  new Player(newPlayerName, "");
+  new Player(newPlayerName.trim(), "");
 
   //create new list entry
   let newListEntry = playerList.appendChild(document.createElement("p"));
@@ -70,7 +70,7 @@ addPlayerBtn.addEventListener("click", () => {
 
 // press Enter to add player to list
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
+  if (event.key === "Enter" && document.activeElement === playerNameInput) {
     addPlayerBtn.click();
   }
 });
