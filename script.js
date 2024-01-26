@@ -76,50 +76,56 @@ document.addEventListener("keydown", (event) => {
 });
 
 // Randomize team
-let newTeam = [];
-let playerOrder = [];
+let newTeam = []; //Stores the chosen characters
+let playerOrder = []; //Stores which player will play which slot
 
 function randomizeTeam() {
-  newTeam.length = 0;
-  playerOrder.length = 0;
+  let validParty = false;
+  let loopCounter = 0; //Counter to prevent infinite loops just in case
+  do {
+    loopCounter++;
+    newTeam.length = 0;
+    playerOrder.length = 0;
 
-  //Player order randomization
-  if (players.length != 0) {
+    //Player order randomization
+    if (players.length != 0) {
+      for (let i = 0; i < 4; i++) {
+        let randomPlayer = players[Math.floor(Math.random() * players.length)];
+        playerOrder.push(randomPlayer);
+      }
+    }
+
+    //Character randomization
     for (let i = 0; i < 4; i++) {
-      //make priority list for players that don't have a slot yet
-      let priorityList = [];
-      for (i = 0; i < players.length; i++) {
-        if (!playerOrder.includes(players[i])) {
-          priorityList.push(players[i]);
-        }
+      let randomCharacter = characters[Math.floor(Math.random() * characters.length)];
+      // Check for duplicate character
+      if (newTeam.includes(randomCharacter)) {
+        i--;
+        continue;
       }
-      //if everyone has a slot, pick a player at random. Otherwise, pick a player who doesn't have a slot
-      let randomPlayer;
-      if (priorityList.length == 0) {
-        randomPlayer = players[Math.floor(Math.random() * players.length)];
-      } else {
-        randomPlayer = priorityList[Math.floor(Math.random() * priorityList.length)];
+      // Check for available slot
+      if (!randomCharacter.possibleSlots.includes(i)) {
+        i--;
+        continue;
       }
-      playerOrder.push(randomPlayer);
+      newTeam.push(randomCharacter);
     }
-  }
 
-  //Character randomization
-  for (let i = 0; i < 4; i++) {
-    let randomCharacter = characters[Math.floor(Math.random() * characters.length)];
-    // Check for duplicate character
-    //if (newTeam.some((e) => e.name === randomCharacter.name))
-    if (newTeam.includes(randomCharacter)) {
-      i--;
-      continue;
+    //Check if party is valid. Party is assumed valid until something proves it's not
+    validParty = true;
+    for (i in players) {
+      if (!playerOrder.includes(players[i])) {
+        validParty = false;
+        break; //Happens if a player didn't get a slot
+      }
     }
-    // Check for available slot
-    if (!randomCharacter.possibleSlots.includes(i)) {
-      i--;
-      continue;
+    for (let i = 0; i < 4; i++) {
+      if (playerOrder[i].bannedChars.includes(newTeam[i])) {
+        validParty = false;
+        break; //Happens if a player got a character they have banned
+      }
     }
-    newTeam.push(randomCharacter);
-  }
+  } while(!validParty && loopCounter < 100000); //Loop stops if a valid party was made or the loop repeated 100.000 times without a valid party
 }
 
 // Click the randomize button
