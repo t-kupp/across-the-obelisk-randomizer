@@ -45,29 +45,25 @@ function addCharactersToDatabase() {
 }
 addCharactersToDatabase();
 
-
 // preload images
 function preloadImage(url) {
   let img = new Image();
   img.src = url;
 }
 
-
 for (Character of characters) {
   preloadImage(Character.imageURL);
 }
 
-
 // Function to create player objects
-function Player(name) {
+function Player(name, bannedChars, preferredCharCount) {
   this.name = name;
-  this.bannedChars = [];
-  this.preferredCharCount = 0 //0 means the player does not care and it will be random
+  this.bannedChars = bannedChars;
+  this.preferredCharCount = preferredCharCount;
   players.push(this);
 }
 
 let players = [];
-
 
 // add players to player list button
 addPlayerBtn.addEventListener("click", () => {
@@ -75,14 +71,32 @@ addPlayerBtn.addEventListener("click", () => {
 
   let newPlayerName = playerNameInput.value;
   playerNameInput.value = ""; // empty text input field
-  new Player(newPlayerName.trim(), "");
+  new Player(newPlayerName.trim(), "", 0);
+
+  // create new list entry wrapper
+  let newWrapper = playerList.appendChild(document.createElement("div"));
+  newWrapper.classList.add("listEntryWrapper");
 
   //create new list entry
-  let newListEntry = playerList.appendChild(document.createElement("p"));
+  let newListEntry = newWrapper.appendChild(document.createElement("p"));
   newListEntry.textContent = newPlayerName;
   newListEntry.classList.add("playerListEntry");
-});
 
+  // create add button
+  let newAddBtn = newWrapper.appendChild(document.createElement("button"))
+  newAddBtn.classList.add("addBtn")
+  newAddBtn.textContent = "+"
+
+  // create value display
+  let newValueDisplay = newWrapper.appendChild(document.createElement("p"))
+  newValueDisplay.classList.add("valueDisplay")
+  newValueDisplay.textContent = (players[players.length - 1]).preferredCharCount // how do I get current players preferredCharCount?
+
+  // create subtract button
+  let newSubtractBtn = newWrapper.appendChild(document.createElement("button"))
+  newSubtractBtn.classList.add("subtractBtn")
+  newSubtractBtn.textContent = "-"
+});
 
 // press Enter to add player to list
 document.addEventListener("keydown", (event) => {
@@ -90,7 +104,6 @@ document.addEventListener("keydown", (event) => {
     addPlayerBtn.click();
   }
 });
-
 
 // Randomize team
 let newTeam = []; //Stores the chosen characters
@@ -103,15 +116,14 @@ function randomizeTeam() {
     let flexibilityExists = false; //Will be true if atleast someone has "?" selected
     for (player of players) {
       if (player.preferredCharCount == 0) {
-        flexibilityExists = true
-        totalNeededChars += 1
-      }
-      else {
-        totalNeededChars += player.preferredCharCount
+        flexibilityExists = true;
+        totalNeededChars += 1;
+      } else {
+        totalNeededChars += player.preferredCharCount;
       }
     }
     if (totalNeededChars > 4 || (totalNeededChars < 4 && !flexibilityExists)) {
-      return // Function ends if people selected too many or too few characters. Later you can insert some feedback code here
+      return; // Function ends if people selected too many or too few characters. Later you can insert some feedback code here
     }
   }
 
@@ -155,7 +167,10 @@ function randomizeTeam() {
           validParty = false;
           break; //Happens if a player didn't get a slot
         }
-        if (player.preferredCharCount < 0 && countElementInArray(player, playerOrder) != player.preferredCharCount) {
+        if (
+          player.preferredCharCount < 0 &&
+          countElementInArray(player, playerOrder) != player.preferredCharCount
+        ) {
           validParty = false;
           break; //Happens if someones preferred character amount doesn't match how many they got assigned. Note: 0 means the player doesn't care
         }
@@ -170,14 +185,12 @@ function randomizeTeam() {
   } //Loop stops if a valid party was made or the loop repeated 100.000 times without a valid party
 }
 
-
 // Click the randomize button
 randomizeBtn.addEventListener("click", () => {
   teamDisplay.innerHTML = "";
   randomizeTeam();
   drawCharacterPortraits();
 });
-
 
 function drawCharacterPortraits() {
   for (let i = 0; i < 4; i++) {
@@ -199,13 +212,11 @@ function drawCharacterPortraits() {
   }
 }
 
-
 // default button
 defaultBtn.addEventListener("click", () => {
   characters.length = 0;
   addCharactersToDatabase();
 });
-
 
 // free for all button
 freeForAllBtn.addEventListener("click", () => {
@@ -214,7 +225,6 @@ freeForAllBtn.addEventListener("click", () => {
   }
 });
 
-
 //Counts how often something exists in an array
 function countElementInArray(element, array) {
   let counter = 0;
@@ -222,9 +232,6 @@ function countElementInArray(element, array) {
     if (i == element) {
       counter++;
     }
-    return counter
+    return counter;
   }
 }
-
-//Änderung luuuuuuuul hahaha
-// twist his diiiiick

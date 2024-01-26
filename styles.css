@@ -33,8 +33,45 @@ body {
 }
 
 .playerList {
+  width: 200px;
   display: flex;
   flex-direction: column;
+}
+
+.listEntryWrapper {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.addBtn,
+.subtractBtn {
+  height: 20px;
+  width: 20px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.addBtn:hover,
+.subtractBtn:hover {
+  background-color: #4a4a4a;
+  border: solid gray 1px;
+  border-radius: 999px;
+}
+
+.valueDisplay {
+  color: white;
+  background-color: #5e5df0;
+  height: 30px;
+  width: 30px;
+  border-radius: 50px;
+  text-align: center;
+  line-height: 30px;
 }
 
 .playerNameInput {
@@ -43,15 +80,17 @@ body {
 
 .playerListEntry,
 .portraitPlayerName {
-  margin: 0px auto;
   width: 100px;
   height: 30px;
   line-height: 30px;
   text-align: center;
-  margin-top: 10px;
   color: white;
   background-color: #5e5df0;
   border: 1px solid white;
+}
+
+.portraitPlayerName {
+  margin: auto;
 }
 
 .addPlayerBtn {
