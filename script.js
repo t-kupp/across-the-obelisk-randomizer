@@ -82,15 +82,17 @@ let playerOrder = []; //Stores which player will play which slot
 function randomizeTeam() {
   let validParty = false;
   let loopCounter = 0; //Counter to prevent infinite loops just in case
-  while(!validParty && loopCounter < 100000 && players.length != 0) {
+  while(!validParty && loopCounter < 100000) {
     loopCounter++;
     newTeam.length = 0;
     playerOrder.length = 0;
 
     //Player order randomization
-    for (let i = 0; i < 4; i++) {
-      let randomPlayer = players[Math.floor(Math.random() * players.length)];
-      playerOrder.push(randomPlayer);
+    if (players.length != 0) {
+      for (let i = 0; i < 4; i++) {
+        let randomPlayer = players[Math.floor(Math.random() * players.length)];
+        playerOrder.push(randomPlayer);
+      }
     }
 
     //Character randomization
@@ -111,16 +113,18 @@ function randomizeTeam() {
 
     //Check if party is valid. Party is assumed valid until something proves it's not
     validParty = true;
-    for (i in players) {
-      if (!playerOrder.includes(players[i])) {
-        validParty = false;
-        break; //Happens if a player didn't get a slot
+    if (players.length != 0) {
+      for (i in players) {
+        if (!playerOrder.includes(players[i])) {
+          validParty = false;
+          break; //Happens if a player didn't get a slot
+        }
       }
-    }
-    for (let i = 0; i < 4; i++) {
-      if (playerOrder[i].bannedChars.includes(newTeam[i])) {
-        validParty = false;
-        break; //Happens if a player got a character they have banned
+      for (let i = 0; i < 4; i++) {
+        if (playerOrder[i].bannedChars.includes(newTeam[i])) {
+          validParty = false;
+          break; //Happens if a player got a character they have banned
+        }
       }
     }
   }//Loop stops if a valid party was made or the loop repeated 100.000 times without a valid party
