@@ -45,24 +45,29 @@ function addCharactersToDatabase() {
 }
 addCharactersToDatabase();
 
+
 // preload images
 function preloadImage(url) {
   let img = new Image();
   img.src = url;
 }
 
+
 for (Character of characters) {
   preloadImage(Character.imageURL);
 }
 
+
 // Function to create player objects
-function Player(name, bannedChars) {
+function Player(name) {
   this.name = name;
-  this.bannedChars = bannedChars;
+  this.bannedChars = [];
+  this.preferredCharCount = 0 //0 means the player does not care and it will be random
   players.push(this);
 }
 
 let players = [];
+
 
 // add players to player list button
 addPlayerBtn.addEventListener("click", () => {
@@ -78,6 +83,7 @@ addPlayerBtn.addEventListener("click", () => {
   newListEntry.classList.add("playerListEntry");
 });
 
+
 // press Enter to add player to list
 document.addEventListener("keydown", (event) => {
   if (event.key === "Enter" && document.activeElement === playerNameInput) {
@@ -85,11 +91,29 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+
 // Randomize team
 let newTeam = []; //Stores the chosen characters
 let playerOrder = []; //Stores which player will play which slot
 
 function randomizeTeam() {
+  //Check if preferred player counts of players are even possible and end the function if they are not
+  let totalNeededChars;
+  let flexibilityExists; //Will be true if atleast someone has "?" selected
+  for (player of players) {
+    if (player.preferredCharCount == 0) {
+      flexibilityExists = true
+      totalNeededChars += 1
+    }
+    else {
+      totalNeededChars += player.preferredCharCount
+    }
+  }
+  if (totalNeededChars > 4 || (totalNeededChars < 4 && !flexibilityExists)) {
+    return // Function ends if people selected too many or too few characters. Later you can insert some feedback code here
+  }
+
+  //Start actual function
   let validParty = false;
   let loopCounter = 0; //Counter to prevent infinite loops just in case
   while (!validParty && loopCounter < 100000) {
@@ -124,10 +148,14 @@ function randomizeTeam() {
     //Check if party is valid. Party is assumed valid until something proves it's not
     validParty = true;
     if (players.length != 0) {
-      for (i in players) {
-        if (!playerOrder.includes(players[i])) {
+      for (player of players) {
+        if (!playerOrder.includes(player)) {
           validParty = false;
           break; //Happens if a player didn't get a slot
+        }
+        if (player.preferredCharCount < 0 && countElementInArray(player, playerOrder) != player.preferredCharCount) {
+          validParty = false;
+          break; //Happens if someones preferred character amount doesn't match how many they got assigned. Note: 0 means the player doesn't care
         }
       }
       for (let i = 0; i < 4; i++) {
@@ -140,12 +168,14 @@ function randomizeTeam() {
   } //Loop stops if a valid party was made or the loop repeated 100.000 times without a valid party
 }
 
+
 // Click the randomize button
 randomizeBtn.addEventListener("click", () => {
   teamDisplay.innerHTML = "";
   randomizeTeam();
   drawCharacterPortraits();
 });
+
 
 function drawCharacterPortraits() {
   for (let i = 0; i < 4; i++) {
@@ -167,11 +197,13 @@ function drawCharacterPortraits() {
   }
 }
 
+
 // default button
 defaultBtn.addEventListener("click", () => {
   characters.length = 0;
   addCharactersToDatabase();
 });
+
 
 // free for all button
 freeForAllBtn.addEventListener("click", () => {
@@ -180,11 +212,14 @@ freeForAllBtn.addEventListener("click", () => {
   }
 });
 
-//Function that lets you find a character by name instead of array index (useful for later(maybe))
-function getCharacterByName(name) {
-  for (let i = 0; i < characters.length; i++) {
-    if (characters[i].name == name) {
-      return characters[i];
+
+//Counts how often something exists in an array
+function countElementInArray(element, array) {
+  let counter = 0;
+  for (i of array) {
+    if (i == element) {
+      counter++;
     }
+    return counter
   }
 }
