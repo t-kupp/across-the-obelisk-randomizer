@@ -82,17 +82,15 @@ let playerOrder = []; //Stores which player will play which slot
 function randomizeTeam() {
   let validParty = false;
   let loopCounter = 0; //Counter to prevent infinite loops just in case
-  do {
+  while(!validParty && loopCounter < 100000 && players.length != 0) {
     loopCounter++;
     newTeam.length = 0;
     playerOrder.length = 0;
 
     //Player order randomization
-    if (players.length != 0) {
-      for (let i = 0; i < 4; i++) {
-        let randomPlayer = players[Math.floor(Math.random() * players.length)];
-        playerOrder.push(randomPlayer);
-      }
+    for (let i = 0; i < 4; i++) {
+      let randomPlayer = players[Math.floor(Math.random() * players.length)];
+      playerOrder.push(randomPlayer);
     }
 
     //Character randomization
@@ -125,7 +123,7 @@ function randomizeTeam() {
         break; //Happens if a player got a character they have banned
       }
     }
-  } while(!validParty && loopCounter < 100000); //Loop stops if a valid party was made or the loop repeated 100.000 times without a valid party
+  }//Loop stops if a valid party was made or the loop repeated 100.000 times without a valid party
 }
 
 // Click the randomize button
