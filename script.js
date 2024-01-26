@@ -98,8 +98,8 @@ let playerOrder = []; //Stores which player will play which slot
 
 function randomizeTeam() {
   //Check if preferred player counts of players are even possible and end the function if they are not
-  let totalNeededChars;
-  let flexibilityExists; //Will be true if atleast someone has "?" selected
+  let totalNeededChars = 0;
+  let flexibilityExists = false; //Will be true if atleast someone has "?" selected
   for (player of players) {
     if (player.preferredCharCount == 0) {
       flexibilityExists = true
