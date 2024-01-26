@@ -149,9 +149,9 @@ function drawCharacterPortraits() {
     characterPortrait.classList.add("characterPortrait");
 
     // add the player name
+    const portraitPlayerName = portraitWrapper.appendChild(document.createElement("p"));
+    portraitPlayerName.classList.add("portraitPlayerName");
     if (players.length != 0) {
-      const portraitPlayerName = portraitWrapper.appendChild(document.createElement("p"));
-      portraitPlayerName.classList.add("portraitPlayerName");
       portraitPlayerName.textContent = playerOrder[i].name;
     }
   }
