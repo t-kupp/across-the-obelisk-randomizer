@@ -97,24 +97,11 @@ let newTeam = []; //Stores the chosen characters
 let playerOrder = []; //Stores which player will play which slot
 
 function randomizeTeam() {
-  //Check if preferred player counts of players are even possible and end the function if they are not
   if (players.length != 0) {
-    let totalNeededChars = 0;
-    let flexibilityExists = false; //Will be true if atleast someone has "?" selected
-    for (player of players) {
-      if (player.preferredCharCount == 0) {
-        flexibilityExists = true
-        totalNeededChars += 1
-      }
-      else {
-        totalNeededChars += player.preferredCharCount
-      }
-    }
-    if (totalNeededChars > 4 || (totalNeededChars < 4 && !flexibilityExists)) {
-      return // Function ends if people selected too many or too few characters. Later you can insert some feedback code here
+    if (!preferredCharCountIsValid()) {
+      return
     }
   }
-
   //Start actual function
   let validParty = false;
   let loopCounter = 0; //Counter to prevent infinite loops just in case
@@ -226,5 +213,22 @@ function countElementInArray(element, array) {
   }
 }
 
-//Änderung luuuuuuuul hahaha
-// twist his diiiiick
+
+//Check if total preferred char count is lower or higher than it needs to be (moved to own function)
+function preferredCharCountIsValid() {
+  let totalNeededChars = 0;
+  let flexibilityExists = false; //Will be true if at least someone has "?" selected
+  for (player of players) {
+    if (player.preferredCharCount == 0) {
+      flexibilityExists = true;
+      totalNeededChars += 1;
+    }
+    else {
+      totalNeededChars += player.preferredCharCount;
+    }
+  }
+  if (totalNeededChars > 4 || (totalNeededChars < 4 && !flexibilityExists)) {
+    return false;
+  }
+  return true // Returns true if it doesn't return false
+}
