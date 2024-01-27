@@ -67,35 +67,53 @@ let players = [];
 
 // add players to player list button
 addPlayerBtn.addEventListener("click", () => {
-  if (players.length === 4 || playerNameInput.value.trim() === "") return;
+  if (
+    players.length === 4 ||
+    playerNameInput.value.trim() === "" ||
+    players.some((player) => player.name === playerNameInput.value.trim())
+  )
+    return;
 
   let newPlayerName = playerNameInput.value;
   playerNameInput.value = ""; // empty text input field
   new Player(newPlayerName.trim(), "", 0);
 
-  // create new list entry wrapper
-  let newWrapper = playerList.appendChild(document.createElement("div"));
-  newWrapper.classList.add("listEntryWrapper");
+  for (let i = 0; i < players.length; i++) {
+    // only draw the last added player
+    if (players.length - 1 !== i) continue;
 
-  //create new list entry
-  let newListEntry = newWrapper.appendChild(document.createElement("p"));
-  newListEntry.textContent = newPlayerName;
-  newListEntry.classList.add("playerListEntry");
+    // create new list entry wrapper
+    let newWrapper = playerList.appendChild(document.createElement("div"));
+    newWrapper.classList.add("listEntryWrapper");
 
-  // create add button
-  let newAddBtn = newWrapper.appendChild(document.createElement("button"))
-  newAddBtn.classList.add("addBtn")
-  newAddBtn.textContent = "+"
+    //create new list entry
+    let newListEntry = newWrapper.appendChild(document.createElement("p"));
+    newListEntry.textContent = newPlayerName;
+    newListEntry.classList.add("playerListEntry");
 
-  // create value display
-  let newValueDisplay = newWrapper.appendChild(document.createElement("p"))
-  newValueDisplay.classList.add("valueDisplay")
-  newValueDisplay.textContent = (players[players.length - 1]).preferredCharCount // how do I get current players preferredCharCount?
+    // create add button
+    let newAddBtn = newWrapper.appendChild(document.createElement("button"));
+    newAddBtn.classList.add("addBtn");
+    newAddBtn.textContent = "+";
+    newAddBtn.addEventListener("click", () => {
+      players[i].preferredCharCount += 1;
+      newValueDisplay.textContent = players[i].preferredCharCount;
+    });
 
-  // create subtract button
-  let newSubtractBtn = newWrapper.appendChild(document.createElement("button"))
-  newSubtractBtn.classList.add("subtractBtn")
-  newSubtractBtn.textContent = "-"
+    // create value display
+    let newValueDisplay = newWrapper.appendChild(document.createElement("p"));
+    newValueDisplay.classList.add("valueDisplay");
+    newValueDisplay.textContent = players[players.length - 1].preferredCharCount; // how do I get current players preferredCharCount?
+
+    // create subtract button
+    let newSubtractBtn = newWrapper.appendChild(document.createElement("button"));
+    newSubtractBtn.classList.add("subtractBtn");
+    newSubtractBtn.textContent = "-";
+    newSubtractBtn.addEventListener("click", () => {
+      players[i].preferredCharCount -= 1;
+      newValueDisplay.textContent = players[i].preferredCharCount;
+    });
+  }
 });
 
 // press Enter to add player to list
@@ -112,7 +130,7 @@ let playerOrder = []; //Stores which player will play which slot
 function randomizeTeam() {
   if (players.length != 0) {
     if (!preferredCharCountIsValid()) {
-      return
+      return;
     }
   }
   //Start actual function
@@ -224,7 +242,6 @@ function countElementInArray(element, array) {
   }
 }
 
-
 //Check if total preferred char count is lower or higher than it needs to be (moved to own function)
 function preferredCharCountIsValid() {
   let totalNeededChars = 0;
@@ -233,13 +250,12 @@ function preferredCharCountIsValid() {
     if (player.preferredCharCount == 0) {
       flexibilityExists = true;
       totalNeededChars += 1;
-    }
-    else {
+    } else {
       totalNeededChars += player.preferredCharCount;
     }
   }
   if (totalNeededChars > 4 || (totalNeededChars < 4 && !flexibilityExists)) {
     return false;
   }
-  return true // Returns true if it doesn't return false
+  return true; // Returns true if it doesn't return false
 }

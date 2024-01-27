@@ -61,7 +61,7 @@ body {
 .subtractBtn:hover {
   background-color: #4a4a4a;
   border: solid gray 1px;
-  border-radius: 999px;
+  border-radius: 5px;
 }
 
 .valueDisplay {
