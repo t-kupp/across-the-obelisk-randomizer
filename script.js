@@ -96,22 +96,31 @@ addPlayerBtn.addEventListener("click", () => {
     newAddBtn.classList.add("addBtn");
     newAddBtn.textContent = "+";
     newAddBtn.addEventListener("click", () => {
-      players[i].preferredCharCount += 1;
+      if (preferredCharCountIsValid(players[i], 1)) players[i].preferredCharCount += 1;
       newValueDisplay.textContent = players[i].preferredCharCount;
+      if (players[i].preferredCharCount === 0) {
+        newValueDisplay.textContent = "?";
+      }
     });
 
     // create value display
     let newValueDisplay = newWrapper.appendChild(document.createElement("p"));
     newValueDisplay.classList.add("valueDisplay");
-    newValueDisplay.textContent = players[players.length - 1].preferredCharCount; // how do I get current players preferredCharCount?
+    newValueDisplay.textContent = players[i].preferredCharCount;
+    if (players[i].preferredCharCount === 0) {
+      newValueDisplay.textContent = "?";
+    }
 
     // create subtract button
     let newSubtractBtn = newWrapper.appendChild(document.createElement("button"));
     newSubtractBtn.classList.add("subtractBtn");
     newSubtractBtn.textContent = "-";
     newSubtractBtn.addEventListener("click", () => {
-      players[i].preferredCharCount -= 1;
+      if (preferredCharCountIsValid(players[i], -1)) players[i].preferredCharCount -= 1;
       newValueDisplay.textContent = players[i].preferredCharCount;
+      if (players[i].preferredCharCount === 0) {
+        newValueDisplay.textContent = "?";
+      }
     });
   }
 });
@@ -128,11 +137,6 @@ let newTeam = []; //Stores the chosen characters
 let playerOrder = []; //Stores which player will play which slot
 
 function randomizeTeam() {
-  if (players.length != 0) {
-    if (!preferredCharCountIsValid()) {
-      return;
-    }
-  }
   //Start actual function
   let validParty = false;
   let loopCounter = 0; //Counter to prevent infinite loops just in case
@@ -243,15 +247,29 @@ function countElementInArray(element, array) {
 }
 
 //Check if total preferred char count is lower or higher than it needs to be (moved to own function)
-function preferredCharCountIsValid() {
+function preferredCharCountIsValid(playerWhoPressed, change) {
+  if (
+    playerWhoPressed.preferredCharCount + change < 0 ||
+    playerWhoPressed.preferredCharCount + change > 3
+  ) {
+    return false;
+  }
   let totalNeededChars = 0;
   let flexibilityExists = false; //Will be true if at least someone has "?" selected
   for (player of players) {
-    if (player.preferredCharCount == 0) {
+    let newCharCount;
+
+    if (player == playerWhoPressed) {
+      newCharCount = player.preferredCharCount + change;
+    } else {
+      newCharCount = player.preferredCharCount;
+    }
+
+    if (newCharCount == 0) {
       flexibilityExists = true;
       totalNeededChars += 1;
     } else {
-      totalNeededChars += player.preferredCharCount;
+      totalNeededChars += newCharCount;
     }
   }
   if (totalNeededChars > 4 || (totalNeededChars < 4 && !flexibilityExists)) {
