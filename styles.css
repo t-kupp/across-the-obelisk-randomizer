@@ -16,6 +16,11 @@ body {
   pointer-events: none;
 }
 
+.unselected {
+  filter: grayscale(1);
+  opacity: 0.3;
+}
+
 .teamDisplay {
   display: flex;
   flex-direction: row-reverse;
@@ -48,7 +53,8 @@ body {
   margin-top: 10px;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .addBtn,
@@ -94,6 +100,12 @@ body {
   border: 1px solid white;
 }
 
+.chooseCharBtn {
+  width: 100px;
+  height: 20px;
+  margin-top: 5px;
+}
+
 .portraitPlayerName {
   margin: auto;
 }
@@ -120,4 +132,41 @@ body {
 
 .randomizeBtn:hover {
   opacity: 0.8;
+}
+
+.characterSelection {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: gray;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.selectionPortraitWrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 100px);
+  gap: 10px;
+}
+
+.selectionPortrait {
+  margin: 0 auto;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.darken-wrapper {
+  display: none;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+  z-index: 1;
+}
+
+.visible {
+  display: block;
 }

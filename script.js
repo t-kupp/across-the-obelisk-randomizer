@@ -5,6 +5,11 @@ const freeForAllBtn = document.querySelector("#freeForAllBtn");
 const playerList = document.querySelector("#playerList");
 const addPlayerBtn = document.querySelector("#addPlayerBtn");
 const playerNameInput = document.querySelector("#playerNameInput");
+const characterSelection = document.querySelector("#characterSelection");
+const selectionPortraitWrapper = document.querySelector("#selectionPortraitWrapper");
+const selectionButtonWrapper = document.querySelector("#selectionButtonWrapper");
+const selectionSaveBtn = document.querySelector("#selectionSaveBtn");
+const darkenWrapper = document.querySelector("#darkenWrapper");
 
 // Function to create new character objects
 function Character(name, category, possibleSlots, imageURL) {
@@ -65,6 +70,13 @@ function Player(name, bannedChars, preferredCharCount) {
 
 let players = [];
 
+// press Enter to add player to list
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" && document.activeElement === playerNameInput) {
+    addPlayerBtn.click();
+  }
+});
+
 // add players to player list button
 addPlayerBtn.addEventListener("click", () => {
   if (
@@ -124,16 +136,47 @@ addPlayerBtn.addEventListener("click", () => {
       }
       setRandomizeButtonState();
     });
+
+    // create choose character button
+    let newChooseCharBtn = newWrapper.appendChild(document.createElement("button"));
+    newChooseCharBtn.classList.add("chooseCharBtn");
+    newChooseCharBtn.textContent = "Characters...";
+    newChooseCharBtn.addEventListener("click", () => {
+      openCharacterSelection();
+    });
   }
   setRandomizeButtonState();
 });
 
-// press Enter to add player to list
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Enter" && document.activeElement === playerNameInput) {
-    addPlayerBtn.click();
+function openCharacterSelection() {
+  selectionPortraitWrapper.innerHTML = "";
+  darkenWrapper.classList.add("visible");
+  // drawing each characters portrait
+  for (char of characters) {
+    let portrait = selectionPortraitWrapper.appendChild(document.createElement("img"));
+    portrait.classList.add("selectionPortrait");
+    portrait.src = char.imageURL;
+    portrait.addEventListener("click", () => {
+      portrait.classList.toggle("unselected");
+    });
   }
-});
+  // Event listeners for the save button
+  console.log(selectionSaveBtn);
+  selectionSaveBtn.addEventListener("click", () => {
+    //
+    // insert code to update bannedChars here
+    //
+    darkenWrapper.classList.remove("visible");
+  });
+
+  // close the selection screen when clicked outside of it
+  darkenWrapper.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (e.target == darkenWrapper) {
+      darkenWrapper.classList.remove("visible");
+    }
+  });
+}
 
 // Randomize team
 let newTeam = []; //Stores the chosen characters
