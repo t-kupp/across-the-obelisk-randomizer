@@ -96,7 +96,7 @@ addPlayerBtn.addEventListener("click", () => {
     newAddBtn.classList.add("addBtn");
     newAddBtn.textContent = "+";
     newAddBtn.addEventListener("click", () => {
-      if (preferredCharCountIsValid(players[i], 1)) players[i].preferredCharCount += 1;
+      if (players[i].preferredCharCount < 3) players[i].preferredCharCount += 1;
       newValueDisplay.textContent = players[i].preferredCharCount;
       if (players[i].preferredCharCount === 0) {
         newValueDisplay.textContent = "?";
@@ -116,7 +116,7 @@ addPlayerBtn.addEventListener("click", () => {
     newSubtractBtn.classList.add("subtractBtn");
     newSubtractBtn.textContent = "-";
     newSubtractBtn.addEventListener("click", () => {
-      if (preferredCharCountIsValid(players[i], -1)) players[i].preferredCharCount -= 1;
+      if (players[i].preferredCharCount > 0) players[i].preferredCharCount -= 1;
       newValueDisplay.textContent = players[i].preferredCharCount;
       if (players[i].preferredCharCount === 0) {
         newValueDisplay.textContent = "?";
@@ -246,34 +246,32 @@ function countElementInArray(element, array) {
   }
 }
 
-//Check if total preferred char count is lower or higher than it needs to be (moved to own function)
-function preferredCharCountIsValid(playerWhoPressed, change) {
-  if (
-    playerWhoPressed.preferredCharCount + change < 0 ||
-    playerWhoPressed.preferredCharCount + change > 3
-  ) {
-    return false;
-  }
+
+//Check if the randomize button should be active and set its state
+function setRandomizeButtonState() {
+  let conditionMet = true; //This is the condition for the button to be active. Gets set to false if there is a reason it shouldn't be active
+  
+  //Valid character amount check
   let totalNeededChars = 0;
   let flexibilityExists = false; //Will be true if at least someone has "?" selected
   for (player of players) {
-    let newCharCount;
-
-    if (player == playerWhoPressed) {
-      newCharCount = player.preferredCharCount + change;
-    } else {
-      newCharCount = player.preferredCharCount;
-    }
-
-    if (newCharCount == 0) {
+    if (player.preferredCharCount == 0) {
       flexibilityExists = true;
       totalNeededChars += 1;
     } else {
-      totalNeededChars += newCharCount;
+      totalNeededChars += player.preferredCharCount;
     }
   }
   if (totalNeededChars > 4 || (totalNeededChars < 4 && !flexibilityExists)) {
-    return false;
+    conditionMet = false;
   }
-  return true; // Returns true if it doesn't return false
+  //---------------------
+
+
+  if (conditionMet) {
+    //Insert code here that activates the button
+  }
+  else {
+    //Insert code here that deactivates the button and greys it out
+  }
 }
