@@ -88,7 +88,7 @@ addPlayerBtn.addEventListener("click", () => {
 
   let newPlayerName = playerNameInput.value;
   playerNameInput.value = ""; // empty text input field
-  new Player(newPlayerName.trim(), "", 0);
+  new Player(newPlayerName.trim(), [], 0);
 
   for (let i = 0; i < players.length; i++) {
     // only draw the last added player
@@ -142,26 +142,42 @@ addPlayerBtn.addEventListener("click", () => {
     newChooseCharBtn.classList.add("chooseCharBtn");
     newChooseCharBtn.textContent = "Characters...";
     newChooseCharBtn.addEventListener("click", () => {
-      openCharacterSelection();
+      openCharacterSelection(players[i]);
     });
   }
   setRandomizeButtonState();
 });
 
-function openCharacterSelection() {
+function openCharacterSelection(currentPlayer) {
   selectionPortraitWrapper.innerHTML = "";
   darkenWrapper.classList.add("visible");
   // drawing each characters portrait
-  for (char of characters) {
+  for (let i = 0; i < characters.length; i++) {
     let portrait = selectionPortraitWrapper.appendChild(document.createElement("img"));
     portrait.classList.add("selectionPortrait");
-    portrait.src = char.imageURL;
+    portrait.src = characters[i].imageURL;
+
+    // gives portraits the unselected class if they are banned
+    if (currentPlayer.bannedChars.includes(characters[i])) {
+      portrait.classList.add("unselected");
+    }
+
     portrait.addEventListener("click", () => {
       portrait.classList.toggle("unselected");
+      // toggle function to activate a banned character again
+      // basically you click on a character portrait and the character gets added to bannedChars
+      // click on it again and the function will find and remove it
+      let index = currentPlayer.bannedChars.indexOf(characters[i]); // returns -1 if character not found
+      if (index !== -1) {
+        currentPlayer.bannedChars.splice(index, 1); // at index, removes 1 character from bannedChars
+      } else {
+        currentPlayer.bannedChars.push(characters[i]);
+      }
+      console.log(players);
     });
   }
+
   // Event listeners for the save button
-  console.log(selectionSaveBtn);
   selectionSaveBtn.addEventListener("click", () => {
     //
     // insert code to update bannedChars here
