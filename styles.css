@@ -11,6 +11,11 @@ body {
   background-color: #292929;
 }
 
+.disabled {
+  filter: grayscale(1);
+  pointer-events: none;
+}
+
 .teamDisplay {
   display: flex;
   flex-direction: row-reverse;
@@ -98,6 +103,7 @@ body {
 }
 
 .randomizeBtn {
+  user-select: none;
   margin: 20px;
   background: #5e5df0;
   border-radius: 999px;

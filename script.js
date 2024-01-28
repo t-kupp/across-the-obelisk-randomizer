@@ -101,6 +101,7 @@ addPlayerBtn.addEventListener("click", () => {
       if (players[i].preferredCharCount === 0) {
         newValueDisplay.textContent = "?";
       }
+      setRandomizeButtonState();
     });
 
     // create value display
@@ -121,8 +122,10 @@ addPlayerBtn.addEventListener("click", () => {
       if (players[i].preferredCharCount === 0) {
         newValueDisplay.textContent = "?";
       }
+      setRandomizeButtonState();
     });
   }
+  setRandomizeButtonState();
 });
 
 // press Enter to add player to list
@@ -246,11 +249,10 @@ function countElementInArray(element, array) {
   }
 }
 
-
 //Check if the randomize button should be active and set its state
 function setRandomizeButtonState() {
   let conditionMet = true; //This is the condition for the button to be active. Gets set to false if there is a reason it shouldn't be active
-  
+
   //Valid character amount check
   let totalNeededChars = 0;
   let flexibilityExists = false; //Will be true if at least someone has "?" selected
@@ -267,11 +269,11 @@ function setRandomizeButtonState() {
   }
   //---------------------
 
-
   if (conditionMet) {
     //Insert code here that activates the button
-  }
-  else {
+    randomizeBtn.classList.remove("disabled");
+  } else {
     //Insert code here that deactivates the button and greys it out
+    randomizeBtn.classList.add("disabled");
   }
 }
