@@ -163,16 +163,21 @@ function openCharacterSelection(currentPlayer) {
     }
 
     portrait.addEventListener("click", () => {
-      portrait.classList.toggle("unselected");
+      if (!portrait.classList.contains("unselected") && currentPlayer.bannedChars.length != 19) {
+        portrait.classList.toggle("unselected");
+      }
+      else if (portrait.classList.contains("unselected")) {
+        portrait.classList.toggle("unselected");
+      }
       // toggle function to activate a banned character again
       // basically you click on a character portrait and the character gets added to bannedChars
       // click on it again and the function will find and remove it
       let index = currentPlayer.bannedChars.indexOf(characters[i]); // returns -1 if character not found
-      if (index !== -1) {
-        currentPlayer.bannedChars.splice(index, 1); // at index, removes 1 character from bannedChars
-      } else {
+      if (index == -1 && currentPlayer.bannedChars.length != 19) {
         currentPlayer.bannedChars.push(characters[i]);
-      }
+      } else if (index != -1) {
+        currentPlayer.bannedChars.splice(index, 1); // at index, removes 1 character from bannedChars
+      } //Reversed this check to test something
       setRandomizeButtonState()
       console.log(players);
     });
