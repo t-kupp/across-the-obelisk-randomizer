@@ -173,6 +173,7 @@ function openCharacterSelection(currentPlayer) {
       } else {
         currentPlayer.bannedChars.push(characters[i]);
       }
+      setRandomizeButtonState()
       console.log(players);
     });
   }
@@ -255,6 +256,10 @@ function randomizeTeam() {
       }
     }
   } //Loop stops if a valid party was made or the loop repeated 100.000 times without a valid party
+  if (!validParty) {
+    newTeam.length = 0;
+    playerOrder.length = 0;
+  } //Makes sure no result happens instead of a random one if it can't generate a valid result
 }
 
 // Click the randomize button
@@ -312,6 +317,13 @@ function countElementInArray(element, array) {
 function setRandomizeButtonState() {
   let conditionMet = true; //This is the condition for the button to be active. Gets set to false if there is a reason it shouldn't be active
 
+  //Check if anyone has less chars available than they want to play
+  for (player of players) {
+    if ((20 - player.bannedChars.length) < player.preferredCharCount || player.bannedChars.length == 20) {
+      conditionMet = false;
+    }
+  }
+  
   //Valid character amount check
   let totalNeededChars = 0;
   let flexibilityExists = false; //Will be true if at least someone has "?" selected
