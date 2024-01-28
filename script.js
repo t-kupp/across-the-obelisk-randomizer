@@ -181,7 +181,7 @@ function randomizeTeam() {
           break; //Happens if a player didn't get a slot
         }
         if (
-          player.preferredCharCount < 0 &&
+          player.preferredCharCount > 0 &&
           countElementInArray(player, playerOrder) != player.preferredCharCount
         ) {
           validParty = false;
@@ -245,8 +245,8 @@ function countElementInArray(element, array) {
     if (i == element) {
       counter++;
     }
-    return counter;
   }
+  return counter;
 }
 
 //Check if the randomize button should be active and set its state
