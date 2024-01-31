@@ -163,7 +163,11 @@ function openCharacterSelection(currentPlayer) {
     }
 
     portrait.addEventListener("click", () => {
-      if (!portrait.classList.contains("unselected") && currentPlayer.bannedChars.length != 19) {
+      //Make it so that player cant have less available players than they want to play
+      let minCharsNeeded = currentPlayer.preferredCharCount
+      if (minCharsNeeded == 0) minCharsNeeded = 1;
+      
+      if (!portrait.classList.contains("unselected") && currentPlayer.bannedChars.length < 20 - minCharsNeeded) {
         portrait.classList.toggle("unselected");
       }
       else if (portrait.classList.contains("unselected")) {
@@ -173,7 +177,7 @@ function openCharacterSelection(currentPlayer) {
       // basically you click on a character portrait and the character gets added to bannedChars
       // click on it again and the function will find and remove it
       let index = currentPlayer.bannedChars.indexOf(characters[i]); // returns -1 if character not found
-      if (index == -1 && currentPlayer.bannedChars.length != 19) {
+      if (index == -1 && currentPlayer.bannedChars.length < 20 - minCharsNeeded) {
         currentPlayer.bannedChars.push(characters[i]);
       } else if (index != -1) {
         currentPlayer.bannedChars.splice(index, 1); // at index, removes 1 character from bannedChars
