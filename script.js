@@ -56,8 +56,8 @@ function preloadImage(url) {
   img.src = url;
 }
 
-for (Character of characters) {
-  preloadImage(Character.imageURL);
+for (char of characters) {
+  preloadImage(char.imageURL);
 }
 
 // Function to create player objects
@@ -164,13 +164,15 @@ function openCharacterSelection(currentPlayer) {
 
     portrait.addEventListener("click", () => {
       //Make it so that player cant have less available players than they want to play
-      let minCharsNeeded = currentPlayer.preferredCharCount
+      let minCharsNeeded = currentPlayer.preferredCharCount;
       if (minCharsNeeded == 0) minCharsNeeded = 1;
-      
-      if (!portrait.classList.contains("unselected") && currentPlayer.bannedChars.length < 20 - minCharsNeeded) {
+
+      if (
+        !portrait.classList.contains("unselected") &&
+        currentPlayer.bannedChars.length < 20 - minCharsNeeded
+      ) {
         portrait.classList.toggle("unselected");
-      }
-      else if (portrait.classList.contains("unselected")) {
+      } else if (portrait.classList.contains("unselected")) {
         portrait.classList.toggle("unselected");
       }
       // toggle function to activate a banned character again
@@ -182,7 +184,7 @@ function openCharacterSelection(currentPlayer) {
       } else if (index != -1) {
         currentPlayer.bannedChars.splice(index, 1); // at index, removes 1 character from bannedChars
       } //Reversed this check to test something
-      setRandomizeButtonState()
+      setRandomizeButtonState();
       console.log(players);
     });
   }
@@ -328,11 +330,14 @@ function setRandomizeButtonState() {
 
   //Check if anyone has less chars available than they want to play
   for (player of players) {
-    if ((20 - player.bannedChars.length) < player.preferredCharCount || player.bannedChars.length == 20) {
+    if (
+      20 - player.bannedChars.length < player.preferredCharCount ||
+      player.bannedChars.length == 20
+    ) {
       conditionMet = false;
     }
   }
-  
+
   //Valid character amount check
   let totalNeededChars = 0;
   let flexibilityExists = false; //Will be true if at least someone has "?" selected

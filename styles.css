@@ -116,7 +116,7 @@ body {
 
 .randomizeBtn {
   user-select: none;
-  margin: 20px;
+  /* margin: 20px;
   background: #5e5df0;
   border-radius: 999px;
   box-shadow: #5e5df0 0 10px 20px -10px;
@@ -127,7 +127,7 @@ body {
   font-weight: 700;
   line-height: 24px;
   padding: 8px 18px;
-  border: 0;
+  border: 0; */
 }
 
 .randomizeBtn:hover {
