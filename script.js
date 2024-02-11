@@ -185,7 +185,6 @@ function openCharacterSelection(currentPlayer) {
         currentPlayer.bannedChars.splice(index, 1); // at index, removes 1 character from bannedChars
       } //Reversed this check to test something
       setRandomizeButtonState();
-      console.log(players);
     });
   }
 
@@ -218,7 +217,6 @@ function randomizeTeam() {
     loopCounter++;
     newTeam.length = 0;
     playerOrder.length = 0;
-
     //Player order randomization
     if (players.length != 0) {
       for (let i = 0; i < 4; i++) {
@@ -295,6 +293,7 @@ function drawCharacterPortraits() {
     const portraitPlayerName = portraitWrapper.appendChild(document.createElement("p"));
     portraitPlayerName.classList.add("portraitPlayerName");
     if (players.length != 0) {
+      portraitPlayerName.classList.add("visible");
       portraitPlayerName.textContent = playerOrder[i].name;
     }
   }

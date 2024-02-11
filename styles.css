@@ -100,6 +100,10 @@ body {
   border: 1px solid white;
 }
 
+.portraitPlayerName {
+  display: none;
+}
+
 .chooseCharBtn {
   width: 100px;
   height: 20px;
@@ -165,6 +169,10 @@ body {
   background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(2px);
   z-index: 1;
+}
+
+.portraitWrapper {
+  height: 345px;
 }
 
 .visible {
