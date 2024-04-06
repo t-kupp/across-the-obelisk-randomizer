@@ -46,7 +46,7 @@ body {
   width: 100vw;
   height: 100vh;
   z-index: -999;
-  opacity: 0.2;
+  opacity: 0.1;
   filter: blur(1.5px);
   -webkit-filter: blur(1.5px);
 }
@@ -264,6 +264,7 @@ body {
   position: fixed;
   bottom: 5%;
   font-size: 14px;
+  border: 1px solid var(--border);
 }
 
 .copyright > a {
