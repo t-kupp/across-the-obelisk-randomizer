@@ -10,6 +10,7 @@ const selectionPortraitWrapper = document.querySelector("#selectionPortraitWrapp
 const selectionButtonWrapper = document.querySelector("#selectionButtonWrapper");
 const selectionSaveBtn = document.querySelector("#selectionSaveBtn");
 const darkenWrapper = document.querySelector("#darkenWrapper");
+const preloadWrapper = document.querySelector("#preloadWrapper");
 
 // Function to create new character objects
 function Character(name, category, possibleSlots, imageURL) {
@@ -49,6 +50,13 @@ function addCharactersToDatabase() {
   new Character("Amelia", "DLC", [1, 2], "./portraits/amelia.jpg");
 }
 addCharactersToDatabase();
+
+// preload images
+for (char of characters) {
+  let image = document.createElement("img");
+  image.src = char.imageURL;
+  preloadWrapper.appendChild(image);
+}
 
 // Function to create player objects
 function Player(name, bannedChars, preferredCharCount) {

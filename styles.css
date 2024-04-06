@@ -37,6 +37,9 @@ body {
   opacity: 0.3;
 }
 
+.preloadWrapper {
+  display: none;
+}
 .content {
   max-width: 1000px;
   padding: 20px;
