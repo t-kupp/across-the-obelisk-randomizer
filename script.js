@@ -297,19 +297,6 @@ function drawCharacterPortraits() {
   }
 }
 
-// // default button
-// defaultBtn.addEventListener("click", () => {
-//   characters.length = 0;
-//   addCharactersToDatabase();
-// });
-
-// // free for all button
-// freeForAllBtn.addEventListener("click", () => {
-//   for (let i = 0; i < characters.length; i++) {
-//     characters[i].possibleSlots = [0, 1, 2, 3];
-//   }
-// });
-
 //Counts how often something exists in an array
 function countElementInArray(element, array) {
   let counter = 0;
