@@ -211,7 +211,7 @@ function randomizeTeam() {
   //Start actual function
   let validParty = false;
   let loopCounter = 0; //Counter to prevent infinite loops just in case
-  while (!validParty && loopCounter < 100000) {
+  while (!validParty && loopCounter < 1000000) {
     loopCounter++;
     newTeam.length = 0;
     playerOrder.length = 0;
@@ -273,7 +273,12 @@ function randomizeTeam() {
 randomizeBtn.addEventListener("click", () => {
   teamDisplay.innerHTML = "";
   randomizeTeam();
-  drawCharacterPortraits();
+  if (newTeam.length == 0 || playerOrder.length == 0) {
+    alert("The randomizer couldn't find a valid party in 100.000 iterations. Your settings might not be able to generate a valid party.");
+  }
+  else {
+    drawCharacterPortraits();
+  }
 });
 
 function drawCharacterPortraits() {
