@@ -274,11 +274,11 @@ randomizeBtn.addEventListener("click", () => {
   teamDisplay.innerHTML = "";
   randomizeTeam();
   if (newTeam.length == 0 || playerOrder.length == 0) {
-    alert("The randomizer couldn't find a valid party in 100.000 iterations. Your settings might not be able to generate a valid party.");
+    alert(
+      "The randomizer couldn't find a valid party in 100.000 iterations. Your settings might not be able to generate a valid party."
+    );
   }
-  else {
-    drawCharacterPortraits();
-  }
+  drawCharacterPortraits();
 });
 
 function drawCharacterPortraits() {
