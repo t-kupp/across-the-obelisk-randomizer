@@ -1,3 +1,11 @@
+:root {
+  --dark: #1f2937;
+  --light: #374151;
+  --border: #414b5a;
+  --white: #ffffff;
+  --accent: #1c64f2;
+}
+
 *,
 *::after,
 *::before {
@@ -6,9 +14,17 @@
   box-sizing: border-box;
 }
 
+* {
+  font-family: Inter, sans-serif;
+}
+
 body {
-  font-family: Lato, sans-serif;
-  background-color: #292929;
+  background-color: #111827;
+}
+
+::placeholder {
+  color: #9ca3af;
+  opacity: 1;
 }
 
 .disabled {
@@ -21,21 +37,24 @@ body {
   opacity: 0.3;
 }
 
+.content {
+  max-width: 1000px;
+  padding: 20px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .teamDisplay {
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-end;
+  max-width: 800px;
 }
 
 .characterPortrait {
-  margin: 10px;
-  width: 185px;
-  height: 290px;
-}
-
-.displayWrapper {
-  display: flex;
-  max-width: 1200px;
+  max-width: 100%;
 }
 
 .displayWrapper > * {
@@ -43,50 +62,59 @@ body {
 }
 
 .playerList {
-  width: 200px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 520px;
 }
 
 .listEntryWrapper {
-  width: 100%;
-  margin-top: 10px;
+  width: 250px;
+  margin: 5px;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  justify-content: space-between;
+  background-color: var(--dark);
+  border-radius: 3px;
+  padding: 10px;
 }
 
 .addBtn,
 .subtractBtn {
-  height: 20px;
-  width: 20px;
-  background: none;
+  height: 28px;
+  width: 28px;
+  background: var(--dark);
   border: none;
-  color: white;
+  border-radius: 3px;
+  color: var(--white);
   font-size: 16px;
   font-weight: 600;
+  margin: 0px 4px 0px;
 }
 
 .addBtn:hover,
 .subtractBtn:hover {
-  background-color: #4a4a4a;
   border: solid gray 1px;
   border-radius: 5px;
 }
 
 .valueDisplay {
   color: white;
-  background-color: #5e5df0;
-  height: 30px;
-  width: 30px;
-  border-radius: 50px;
+  height: 28px;
+  width: 28px;
+  border-radius: 3px;
   text-align: center;
   line-height: 30px;
+  font-weight: 600;
 }
 
 .playerNameInput {
+  background-color: var(--light);
+  border: 1px solid var(--border);
+  color: white;
   width: 100px;
+  border-radius: 3px;
+  padding: 5px;
 }
 
 .playerListEntry,
@@ -96,8 +124,10 @@ body {
   line-height: 30px;
   text-align: center;
   color: white;
-  background-color: #5e5df0;
-  border: 1px solid white;
+  background-color: var(--accent);
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .portraitPlayerName {
@@ -105,9 +135,13 @@ body {
 }
 
 .chooseCharBtn {
-  width: 100px;
-  height: 20px;
-  margin-top: 5px;
+  width: 28px;
+  height: 28px;
+  background-color: var(--light);
+  color: var(--white);
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
 }
 
 .portraitPlayerName {
@@ -115,20 +149,27 @@ body {
 }
 
 .addPlayerBtn {
-  width: 20px;
+  height: 28px;
+  width: 28px;
+  background-color: var(--dark);
+  border: 1px solid var(--border);
+  color: white;
+  border-radius: 3px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
 }
 
 .randomizeBtn {
   user-select: none;
   margin: 20px;
-  background: #5e5df0;
-  border-radius: 999px;
-  box-shadow: #5e5df0 0 10px 20px -10px;
-  color: #ffffff;
+  background: var(--accent);
+  border-radius: 3px;
+  box-shadow: #5e5df0 0px 0px 10px 0px;
+  color: var(--white);
   cursor: pointer;
-  font-family: Lato, sans-serif;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 24px;
   padding: 8px 18px;
   border: 0;
@@ -143,22 +184,23 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: gray;
-  padding: 10px;
-  border-radius: 10px;
+  background-color: var(--dark);
+  border: 1px solid var(--border);
+  padding: 5px;
+  border-radius: 3px;
 }
 
 .selectionPortraitWrapper {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(5, 100px);
+  grid-template-rows: repeat(5, 15vh);
   gap: 10px;
 }
 
 .selectionPortrait {
   margin: 0 auto;
-  max-height: 100%;
   object-fit: cover;
+  max-height: 100%;
 }
 
 .darken-wrapper {
@@ -172,9 +214,26 @@ body {
 }
 
 .portraitWrapper {
-  height: 345px;
+  max-width: 100%;
+  margin: 0px 5px 0px;
+}
+
+.playerInputWrapper {
+  margin: 10px;
+  margin-top: 40px;
 }
 
 .visible {
   display: block;
+}
+
+.selectionSaveBtn {
+  color: var(--white);
+  background-color: var(--accent);
+  border-radius: 3px;
+  border: none;
+  padding: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
 }

@@ -50,16 +50,6 @@ function addCharactersToDatabase() {
 }
 addCharactersToDatabase();
 
-// preload images
-function preloadImage(url) {
-  let img = new Image();
-  img.src = url;
-}
-
-for (char of characters) {
-  preloadImage(char.imageURL);
-}
-
 // Function to create player objects
 function Player(name, bannedChars, preferredCharCount) {
   this.name = name;
@@ -140,7 +130,7 @@ addPlayerBtn.addEventListener("click", () => {
     // create choose character button
     let newChooseCharBtn = newWrapper.appendChild(document.createElement("button"));
     newChooseCharBtn.classList.add("chooseCharBtn");
-    newChooseCharBtn.textContent = "Characters...";
+    newChooseCharBtn.innerHTML = '<i class="fa-solid fa-gear"></i>';
     newChooseCharBtn.addEventListener("click", () => {
       openCharacterSelection(players[i]);
     });
@@ -299,18 +289,18 @@ function drawCharacterPortraits() {
   }
 }
 
-// default button
-defaultBtn.addEventListener("click", () => {
-  characters.length = 0;
-  addCharactersToDatabase();
-});
+// // default button
+// defaultBtn.addEventListener("click", () => {
+//   characters.length = 0;
+//   addCharactersToDatabase();
+// });
 
-// free for all button
-freeForAllBtn.addEventListener("click", () => {
-  for (let i = 0; i < characters.length; i++) {
-    characters[i].possibleSlots = [0, 1, 2, 3];
-  }
-});
+// // free for all button
+// freeForAllBtn.addEventListener("click", () => {
+//   for (let i = 0; i < characters.length; i++) {
+//     characters[i].possibleSlots = [0, 1, 2, 3];
+//   }
+// });
 
 //Counts how often something exists in an array
 function countElementInArray(element, array) {
