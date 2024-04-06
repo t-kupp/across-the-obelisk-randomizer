@@ -284,13 +284,17 @@ function drawCharacterPortraits() {
 
     // add the portrait image
     const characterPortrait = portraitWrapper.appendChild(document.createElement("img"));
-    characterPortrait.src = newTeam[i].imageURL;
+    //check for failed team generation and display background placeholder
+    if (newTeam.length !== 0) {
+      characterPortrait.src = newTeam[i].imageURL;
+    } else {
+      characterPortrait.src = "./portraits/placeholder.jpg";
+    }
     characterPortrait.classList.add("characterPortrait");
-
     // add the player name
     const portraitPlayerName = portraitWrapper.appendChild(document.createElement("p"));
     portraitPlayerName.classList.add("portraitPlayerName");
-    if (players.length != 0) {
+    if (players.length != 0 && newTeam.length != 0) {
       portraitPlayerName.classList.add("visible");
       portraitPlayerName.textContent = playerOrder[i].name;
     }
