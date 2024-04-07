@@ -3,7 +3,7 @@
   --light: #374151;
   --border: #414b5a;
   --white: #ffffff;
-  --accent: #1c64f2;
+  --accent: #90279d;
 }
 
 *,
@@ -160,6 +160,11 @@ body {
   cursor: pointer;
 }
 
+.chooseCharBtn:hover {
+  border: 1px solid var(--border);
+  opacity: 0.9;
+}
+
 .portraitPlayerName {
   margin: auto;
 }
@@ -181,7 +186,7 @@ body {
   margin: 20px;
   background: var(--accent);
   border-radius: 3px;
-  box-shadow: #5e5df0 0px 0px 10px 0px;
+  box-shadow: var(--accent) 0px 0px 10px 0px;
   color: var(--white);
   cursor: pointer;
   font-size: 16px;
@@ -244,6 +249,8 @@ body {
 }
 
 .selectionSaveBtn {
+  display: block;
+  width: 30%;
   color: var(--white);
   background-color: var(--accent);
   border-radius: 3px;
@@ -252,6 +259,7 @@ body {
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
+  margin: 10px auto 5px;
 }
 
 .copyright {
