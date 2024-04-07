@@ -118,6 +118,7 @@ addPlayerBtn.addEventListener("click", () => {
     let newValueDisplay = newWrapper.appendChild(document.createElement("p"));
     newValueDisplay.classList.add("valueDisplay");
     newValueDisplay.textContent = players[i].preferredCharCount;
+    newValueDisplay.title = "Choose how many characters you want to control. ? is random.";
     if (players[i].preferredCharCount === 0) {
       newValueDisplay.textContent = "?";
     }
@@ -300,7 +301,7 @@ function drawCharacterPortraits() {
     const portraitPlayerName = portraitWrapper.appendChild(document.createElement("p"));
     portraitPlayerName.classList.add("portraitPlayerName");
     if (players.length != 0 && newTeam.length != 0) {
-      portraitPlayerName.classList.add("visible");
+      portraitPlayerName.style.visibility = "visible";
       portraitPlayerName.textContent = playerOrder[i].name;
     }
   }

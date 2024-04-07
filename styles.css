@@ -119,7 +119,6 @@ body {
   color: white;
   height: 28px;
   width: 28px;
-  border-radius: 3px;
   text-align: center;
   line-height: 30px;
   font-weight: 600;
@@ -148,7 +147,7 @@ body {
 }
 
 .portraitPlayerName {
-  display: none;
+  visibility: hidden;
 }
 
 .chooseCharBtn {
@@ -277,4 +276,15 @@ body {
 
 .copyright > a > i {
   font-size: 18px;
+}
+
+@media (max-width: 720px) {
+  .portraitPlayerName {
+    width: 80px;
+    font-size: 12px;
+  }
+
+  .playerList {
+    flex-direction: column;
+  }
 }
