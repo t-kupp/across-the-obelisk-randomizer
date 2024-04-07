@@ -273,9 +273,9 @@ function randomizeTeam() {
 randomizeBtn.addEventListener("click", () => {
   teamDisplay.innerHTML = "";
   randomizeTeam();
-  if (newTeam.length == 0 || playerOrder.length == 0) {
+  if (newTeam.length == 0) {
     alert(
-      "The randomizer couldn't find a valid party in 100.000 iterations. Your settings might not be able to generate a valid party."
+      "The randomizer couldn't find a valid party in 1.000.000 iterations! Your settings might not be able to generate a valid party."
     );
   }
   drawCharacterPortraits();
