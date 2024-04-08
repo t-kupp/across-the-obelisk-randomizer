@@ -1,6 +1,6 @@
 ![image](https://github.com/t-kupp/across-the-obelisk-randomizer/assets/123904992/44048761-86ee-4681-baa1-3bb8d14a6b5f)
 
-[Click me for a live preview.](https://t-kupp.github.io/across-the-obelisk-randomizer/)
+[Click me for a live preview!](https://t-kupp.github.io/across-the-obelisk-randomizer/)
 #
 
 A team randomizer for the game [Across the Obelisk](https://store.steampowered.com/app/1385380/Across_the_Obelisk/)!
