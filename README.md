@@ -1,4 +1,5 @@
-![image](https://github.com/t-kupp/across-the-obelisk-randomizer/assets/123904992/5acc2a66-b10f-4456-872e-d83a8697f676)
+![image](https://github.com/t-kupp/across-the-obelisk-randomizer/assets/123904992/44048761-86ee-4681-baa1-3bb8d14a6b5f)
+
 
 A team randomizer for the game [Across the Obelisk](https://store.steampowered.com/app/1385380/Across_the_Obelisk/)!
 My friend and I were tired of always playing the same characters, so we built a randomizer to force us to try new team compilations.
