@@ -214,7 +214,7 @@ body {
 .selectionPortraitWrapper {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(5, 15vh);
+  grid-template-rows: repeat(6, 15vh);
   gap: 10px;
 }
 
