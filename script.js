@@ -48,6 +48,7 @@ function addCharactersToDatabase() {
   new Character("Laia", "DLC", [1, 2], "./portraits/laia.jpg");
   new Character("Navalea", "DLC", [1, 2], "./portraits/navalea.jpg");
   new Character("Amelia", "DLC", [1, 2], "./portraits/amelia.jpg");
+  new Character("Nenukil", "DLC", [1, 2], "./portraits/nenukil.jpg");
 }
 addCharactersToDatabase();
 
@@ -324,10 +325,7 @@ function setRandomizeButtonState() {
 
   //Check if anyone has less chars available than they want to play
   for (player of players) {
-    if (
-      20 - player.bannedChars.length < player.preferredCharCount ||
-      player.bannedChars.length == 20
-    ) {
+    if (20 - player.bannedChars.length < player.preferredCharCount || player.bannedChars.length == 20) {
       conditionMet = false;
     }
   }
