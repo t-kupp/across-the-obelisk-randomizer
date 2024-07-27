@@ -169,7 +169,7 @@ function openCharacterSelection(currentPlayer) {
 
       if (
         !portrait.classList.contains("unselected") &&
-        currentPlayer.bannedChars.length < 20 - minCharsNeeded
+        currentPlayer.bannedChars.length < characters.length - minCharsNeeded
       ) {
         portrait.classList.toggle("unselected");
       } else if (portrait.classList.contains("unselected")) {
@@ -179,7 +179,7 @@ function openCharacterSelection(currentPlayer) {
       // basically you click on a character portrait and the character gets added to bannedChars
       // click on it again and the function will find and remove it
       let index = currentPlayer.bannedChars.indexOf(characters[i]); // returns -1 if character not found
-      if (index == -1 && currentPlayer.bannedChars.length < 20 - minCharsNeeded) {
+      if (index == -1 && currentPlayer.bannedChars.length < characters.length - minCharsNeeded) {
         currentPlayer.bannedChars.push(characters[i]);
       } else if (index != -1) {
         currentPlayer.bannedChars.splice(index, 1); // at index, removes 1 character from bannedChars
@@ -325,7 +325,10 @@ function setRandomizeButtonState() {
 
   //Check if anyone has less chars available than they want to play
   for (player of players) {
-    if (20 - player.bannedChars.length < player.preferredCharCount || player.bannedChars.length == 20) {
+    if (
+      characters.length - player.bannedChars.length < player.preferredCharCount ||
+      player.bannedChars.length == characters.length
+    ) {
       conditionMet = false;
     }
   }
